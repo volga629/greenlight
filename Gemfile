@@ -43,7 +43,13 @@ gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
+gem 'ckeditor', '4.1.3'
+
 gem 'rails_admin', '~> 1.3'
+
+gem 'rails_admin_rollincode', '~> 1.0'
+
+gem 'rails_admin_email', :git => "https://github.com/ankit8898/rails_admin_email.git"
 
 # Authentication.
 gem 'omniauth'
