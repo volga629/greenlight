@@ -1,0 +1,9 @@
+<h3>Send Email To Users</h3>&nbsp
+<div class="container">
+	<div class="row">
+		<div class="col-md-6">
+			<%= select_tag 'users', options_for_select(@users.map{ |s| [s.email, s.id] }), class: 'form-control', prompt: 'Please Select User' %>
+		</div>
+	</div>
+	<br><br>
+</div>

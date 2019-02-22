@@ -1,3 +1,6 @@
+require Rails.root.join('lib', 'rails_admin', 'invites_email.rb')
+RailsAdmin::Config::Actions.register(RailsAdmin::Config::Actions::InvitesEmail)
+
 RailsAdmin.config do |config|
 
 config.authenticate_with do
@@ -24,5 +27,6 @@ config.included_models = [
     edit
     delete
     show_in_app
+    invites_email
   end
 end
