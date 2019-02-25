@@ -1,5 +1,5 @@
-require Rails.root.join('lib', 'rails_admin', 'invites_email.rb')
-RailsAdmin::Config::Actions.register(RailsAdmin::Config::Actions::InvitesEmail)
+
+include RailsAdmin::CustomHelper
 
 RailsAdmin.config do |config|
 
@@ -9,12 +9,10 @@ end
 
 config.current_user_method(&:current_admin)
 
-
 config.included_models = [
     "EmailTemplate",
     "User",
     "Admin",
-    "Room",
   ]
 
   config.actions do
@@ -27,6 +25,5 @@ config.included_models = [
     edit
     delete
     show_in_app
-    invites_email
   end
 end

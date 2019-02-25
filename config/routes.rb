@@ -70,7 +70,6 @@ Rails.application.routes.draw do
 
   # for email_template_resources
   resources :email_templates
-
   # Extended room routes.
   scope '/:room_uid' do
     post '/', to: 'rooms#join'
