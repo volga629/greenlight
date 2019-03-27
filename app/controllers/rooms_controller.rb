@@ -19,8 +19,8 @@
 class RoomsController < ApplicationController
   before_action :validate_accepted_terms, unless: -> { !Rails.configuration.terms }
   before_action :validate_verified_email, unless: -> { !Rails.configuration.enable_email_verification }
-  before_action :find_room, except: :create
-  before_action :verify_room_ownership, except: [:create, :show, :join, :logout]
+  before_action :find_room, :except =>[:create,:invite_users] 
+  before_action :verify_room_ownership, except: [:create, :show, :join, :logout, :invite_users]
 
   META_LISTED = "gl-listed"
 
@@ -97,6 +97,18 @@ class RoomsController < ApplicationController
     # Don't delete the users home room.
     @room.destroy if @room.owned_by?(current_user) && @room != current_user.main_room
 
+    redirect_to current_user.main_room
+  end
+
+  def invite_users
+    respond_to do |format|
+    format.html
+    format.js
+    end
+  end
+
+  def send_invitation_to_users
+    UserMailer.send_invitation(params).deliver
     redirect_to current_user.main_room
   end
 

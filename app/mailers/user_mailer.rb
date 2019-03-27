@@ -30,4 +30,21 @@ class UserMailer < ApplicationMailer
     @url = url
     mail to: user.email, subject: t('reset_password.subtitle')
   end
+
+  def send_invitation params
+    @template = EmailTemplate.find_by_name('Meeting Scheduled')
+    params["group-a"].each do |index, user|
+      if User.find_by(email: user["text-input"]).present?
+        @user = user["text-input"] 
+        (mail to: @user, subject: t('user_invitation.subtitle'), body: @template.template_details).deliver
+      end
+    end
+  end
+
+  def send_token_to_user user
+    @template = EmailTemplate.find_by_name('Token Information')
+    @user = user
+    mail to: user.email, subject: t('user_token_information.subtitle')
+  end
+
 end

@@ -28,13 +28,34 @@ class SessionsController < ApplicationController
 
   # POST /users/login
   def create
-    user = User.find_by(email: session_params[:email])
-    if user && !user.greenlight_account?
-      redirect_to root_path, notice: I18n.t("invalid_login_method")
-    elsif user.try(:authenticate, session_params[:password])
+    @user = User.find_by(email: session_params[:email])
+    if @user.present?
+      generate_and_send_token(@user)
+      respond_to do |format|
+        format.js {render "create", :locals => {:user => @user} }
+        format.html
+      end
+    else
+      redirect_to root_path, notice: I18n.t("invalid_user_email")
+    end
+  end
+
+  def verify_token_and_login
+    user = User.find_by(token: session_params[:token])
+    if user.present?
       login(user)
+    elsif user && !user.greenlight_account?
+      redirect_to root_path, notice: I18n.t("invalid_login_method")
     else
       redirect_to root_path, notice: I18n.t("invalid_credentials")
+    end
+  end
+
+  def resend_token
+    @user = User.find_by_uid(params[:id])
+    generate_and_send_token(@user)
+    respond_to do |format|
+      format.js{}
     end
   end
 
@@ -65,6 +86,6 @@ class SessionsController < ApplicationController
   end
 
   def session_params
-    params.require(:session).permit(:email, :password)
+    params.require(:session).permit(:email, :password, :token)
   end
 end

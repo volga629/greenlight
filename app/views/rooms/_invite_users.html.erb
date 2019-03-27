@@ -1,0 +1,41 @@
+<%= form_for :user, :html => {:class => 'repeater'}, :as => :post, :url => send_invitation_to_users_room_path do |f| %>
+	<div class="modal-header">
+	  <button type="button" class="close" data-dismiss="modal">x</button>
+	  <h4 class="modal-title" id="myModalLabel"></h4>
+	</div>
+	<div class="modal-body">
+		<div>
+      <div data-repeater-list="group-a" class="data-repeate">
+        <div data-repeater-item class="user_email">
+          <%= f.text_field('text-input', class: "form-control", placeholder: "Enter user's email", required: true) %>
+          <input data-repeater-delete type="button" value="Remove" class="btn btn-primary" />
+        </div>
+      </div>
+      <input data-repeater-create type="button" value="Add" class="btn btn-primary" />
+    </div>
+	</div>
+	<div class="modal-footer">
+    <%= f.submit 'Send Email', class: "btn btn-primary"%>
+	</div>
+<%end%>
+
+<script>
+  $(document).ready(function () {
+    $('.repeater').repeater({
+        initEmpty: true,
+        defaultValues: {
+          'text-input': ''
+        },
+        show: function () {
+          $(this).slideDown();
+        },
+        hide: function (deleteElement) {
+          $(this).slideUp(deleteElement);
+        },
+        ready: function (setIndexes) {
+          $dragAndDrop.on('drop', setIndexes);
+        },
+        isFirstItemUndeletable: true
+    })
+  });
+</script>

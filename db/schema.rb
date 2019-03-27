@@ -10,17 +10,42 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181217142710) do
+ActiveRecord::Schema.define(version: 20190228112444) do
+
+  create_table "admins", force: :cascade do |t|
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.index ["email"], name: "index_admins_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+  end
+
+  create_table "email_templates", force: :cascade do |t|
+    t.string   "name"
+    t.text     "template_details"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
 
   create_table "rooms", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "name"
     t.string   "uid"
     t.string   "bbb_id"
-    t.integer  "sessions",     default: 0
+    t.integer  "sessions",      default: 0
     t.datetime "last_session"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.string   "room_settings", default: "{ }"
     t.index ["bbb_id"], name: "index_rooms_on_bbb_id"
     t.index ["last_session"], name: "index_rooms_on_last_session"
     t.index ["name"], name: "index_rooms_on_name"
@@ -40,13 +65,14 @@ ActiveRecord::Schema.define(version: 20181217142710) do
     t.string   "image"
     t.string   "password_digest"
     t.boolean  "accepted_terms",  default: false
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
     t.boolean  "email_verified",  default: false
     t.string   "language",        default: "default"
-    t.string   "role",            default: "moderator"
     t.string   "reset_digest"
     t.datetime "reset_sent_at"
+    t.datetime "last_sign_in_at"
+    t.string   "token"
     t.index ["password_digest"], name: "index_users_on_password_digest", unique: true
     t.index ["room_id"], name: "index_users_on_room_id"
   end

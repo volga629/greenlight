@@ -30,5 +30,6 @@
 //= require tabler.plugins
 //= require turbolinks
 //= require_tree .
+//= require jquey_repeater
 //= require jquery
 //= require jquery_ujs
