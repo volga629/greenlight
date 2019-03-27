@@ -78,6 +78,7 @@ en:
   home_room: Home Room
   info_update_success: Information successfully updated.
   invalid_credentials: Login failed due to invalid credentials. Are you sure you entered them correctly?
+  invalid_user_email: Login failed due to invalid email. Are you sure you entered them correctly?
   invalid_login_method: Login failed due to account mismatch. You need to log in with omniauth.
   invite_message: "To invite someone to the meeting, send them this link:"
   landing:
@@ -165,6 +166,10 @@ en:
     password: New Password
     confirm: New Password Confirmation
     update: Update Password
+  user_invitation:
+    subtitle: invitation
+  user_token_information:
+    subtitle: Token Information
   room:
     create_room_error: There was an error creating the room
     create_room_success: Room created successfully

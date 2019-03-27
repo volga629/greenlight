@@ -69,7 +69,13 @@ gem 'redcarpet'
 
 gem 'devise'
 
+
+gem 'ckeditor', '4.1.3'
+
 gem 'rails_admin', '~> 1.3'
+
+gem 'rails_admin_rollincode', '~> 1.0'
+
 
 # For health check endpoint
 gem "health_check"

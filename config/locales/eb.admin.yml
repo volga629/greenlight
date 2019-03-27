@@ -1,0 +1,7 @@
+en:
+  admin:
+    actions: 
+      help_for_user:
+        breadcrumb: "Email"
+        menu: "Email"
+        title: "User Edit Help"
