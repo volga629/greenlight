@@ -92,6 +92,5 @@ module Greenlight
 
     # Configure which settings are available to user on room creation/edit after creation
     config.room_features = ENV['ROOM_FEATURES'] || ""
-
   end
 end
