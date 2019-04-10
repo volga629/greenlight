@@ -1,0 +1,7 @@
+en:
+  admin:
+    actions: 
+      invites_email:
+        breadcrumb: "Send Email"
+        menu: "Send Email"
+        title: "Send Email"
