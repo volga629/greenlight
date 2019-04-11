@@ -35,6 +35,10 @@ Rails.application.routes.draw do
   post '/signup', to: 'users#create', as: :create_user
 
   # Redirect to terms page
+
+  # post '/generate_and_send_token', to: 'application#generate_and_send_token', as: :generate_and_send_token
+
+
   match '/terms', to: 'users#terms', via: [:get, :post]
 
   # Password reset resources.
@@ -51,6 +55,13 @@ Rails.application.routes.draw do
   scope '/u' do
     # Handles login of greenlight provider accounts.
     post '/login', to: 'sessions#create', as: :create_session
+
+    resources :sessions do
+      member do
+        post :verify_token_and_login
+        get :resend_token
+      end
+    end
 
     # Log the user out of the session.
     get '/logout', to: 'sessions#destroy'
@@ -69,7 +80,13 @@ Rails.application.routes.draw do
   get '/auth/failure', to: 'sessions#omniauth_fail'
 
   # Room resources.
-  resources :rooms, only: [:create, :show, :destroy], param: :room_uid, path: '/'
+  resources :rooms, only: [:create, :show, :destroy], param: :room_uid, path: '/' do
+    member do
+      get :invite_users
+      post :send_invitation_to_users
+    end
+  end
+
 
   # for email_template_resources
   resources :email_templates

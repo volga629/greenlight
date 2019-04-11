@@ -1,0 +1,37 @@
+<%= form_for(:session, url: verify_token_and_login_session_path(@user)) do |f| %>
+  <div class="modal-header">
+    <h3 id="token-error"></h3>
+    <button type="button" class="close" data-dismiss="modal" data-backdrop="static" data-keyboard="false">x</button>
+    <h4 class="modal-title" id="myModalLabel"></h4>
+  </div>
+  <div class="token_verification_heading">
+    <h2>Token Verification</h2>
+  </div>
+  <div class="modal-body">
+    <%= f.text_field :token, class: "form-control", placeholder: "Token via Email", value: "", required: true%>
+  </div>
+  <div class="modal-footer">
+    <%= f.submit "Login", class: "btn btn-outline-primary btn-block btn-pill"%>
+  </div>
+<%end%>
+<div class="resend-btn">
+  <%= link_to "Resend Token", resend_token_session_path(@user), remote: true %>
+</div>
+
+<script>
+  $(document).ready(function() {
+    $('form').on('submit', function(e){
+      var params_token  = $('#session_token').val();
+      var user_token = '<%= @user.token %>';
+      alert(user_token);
+      if(params_token == user_token) {
+        return true
+      }
+      else{
+        document.getElementById('token-error').innerHTML="Invalid Token";
+        $("#token-error").delay(500).fadeOut("slow");
+        return false
+      }
+    });
+  });
+</script>

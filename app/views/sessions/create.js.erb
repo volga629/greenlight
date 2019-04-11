@@ -1,0 +1,5 @@
+$('#loginModal').remove();
+// $(".modal-backdrop").remove();
+$( '#loginModal' ).data( 'fade.show', null);
+$("#modal-window").find(".modal-content").html("<%= escape_javascript (render 'verify_token', locals: { user: @user})%>");
+$("#modal-window").modal();
