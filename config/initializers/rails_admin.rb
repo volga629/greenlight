@@ -1,19 +1,20 @@
+# frozen_string_literal: true
+
 RailsAdmin.config do |config|
+  config.authenticate_with do
+    warden.authenticate! scope: :admin
+  end
 
-config.authenticate_with do
- warden.authenticate! scope: :admin
-end
+  config.current_user_method(&:current_admin)
 
-config.current_user_method(&:current_admin)
+  # config.authenticate_with do
+  #    warden.authenticate! scope: :user
+  # end
+  # config.current_user_method(&:current_user)
 
-# config.authenticate_with do
-#    warden.authenticate! scope: :user
-# end
-# config.current_user_method(&:current_user)
-
-# config.authorize_with do
-#   redirect_to root_path
-# end
+  # config.authorize_with do
+  #   redirect_to root_path
+  # end
   ### Popular gems integration
 
   ## == Devise ==
