@@ -1,4 +1,8 @@
+
 # frozen_string_literal: true
+
+
+include RailsAdmin::CustomHelper
 
 RailsAdmin.config do |config|
   config.authenticate_with do
@@ -37,6 +41,11 @@ RailsAdmin.config do |config|
   ## == Gravatar integration ==
   ## To disable Gravatar integration in Navigation Bar set to false
   # config.show_gravatar = true
+config.included_models = [
+    "EmailTemplate",
+    "User",
+    "Admin",
+  ]
 
   config.actions do
     dashboard                     # mandatory
@@ -48,9 +57,5 @@ RailsAdmin.config do |config|
     edit
     delete
     show_in_app
-
-    ## With an audit adapter, you can add:
-    # history_index
-    # history_show
   end
 end
