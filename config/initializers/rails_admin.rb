@@ -1,6 +1,5 @@
 
-# frozen_string_literal: true
-
+#frozen_string_literal: true
 
 include RailsAdmin::CustomHelper
 
@@ -10,6 +9,7 @@ RailsAdmin.config do |config|
   end
 
   config.current_user_method(&:current_admin)
+
 
   # config.authenticate_with do
   #    warden.authenticate! scope: :user
