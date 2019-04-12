@@ -1,5 +1,5 @@
 
-#frozen_string_literal: true
+# frozen_string_literal: true
 
 include RailsAdmin::CustomHelper
 
@@ -9,7 +9,6 @@ RailsAdmin.config do |config|
   end
 
   config.current_user_method(&:current_admin)
-
 
   # config.authenticate_with do
   #    warden.authenticate! scope: :user
@@ -41,11 +40,11 @@ RailsAdmin.config do |config|
   ## == Gravatar integration ==
   ## To disable Gravatar integration in Navigation Bar set to false
   # config.show_gravatar = true
-config.included_models = [
-    "EmailTemplate",
-    "User",
-    "Admin",
-  ]
+  config.included_models = %w(
+    EmailTemplate
+    User
+    Admin
+  )
 
   config.actions do
     dashboard                     # mandatory

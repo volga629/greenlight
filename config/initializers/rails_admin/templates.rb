@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RailsAdmin.config do |config|
   config.model EmailTemplate do
     edit do
@@ -8,7 +10,7 @@ RailsAdmin.config do |config|
       field :dynamic_content do
         help false
         css_class "col-md-2"
-      	partial 'dynamic_content'
+        partial 'dynamic_content'
         label 'Dynamic Tags'
       end
     end

@@ -20,10 +20,9 @@ class RoomsController < ApplicationController
   before_action :validate_accepted_terms, unless: -> { !Rails.configuration.terms }
   before_action :validate_verified_email, except: [:show, :join],
                 unless: -> { !Rails.configuration.enable_email_verification }
-  before_action :find_room, :except =>[:create,:invite_users]           
+  before_action :find_room, except: [:create, :invite_users]
   before_action :verify_room_owner_verified, only: [:show, :join]
   before_action :verify_room_ownership, except: [:create, :show, :join, :logout, :invite_users]
-
 
   include RecordingsHelper
   META_LISTED = "gl-listed"
@@ -82,7 +81,7 @@ class RoomsController < ApplicationController
     opts = default_meeting_options
     unless @room.owned_by?(current_user)
       # Assign join name if passed.
-      if params[@room.invite_path] 
+      if params[@room.invite_path]
         @join_name = params[@room.invite_path][:join_name]
       elsif !params[:join_name]
         # Join name not passed.
@@ -120,8 +119,8 @@ class RoomsController < ApplicationController
 
   def invite_users
     respond_to do |format|
-    format.html
-    format.js
+      format.html
+      format.js
     end
   end
 
@@ -258,8 +257,6 @@ class RoomsController < ApplicationController
       redirect_to account_activation_path(current_user) unless current_user.email_verified
     end
   end
-
- 
 
   def verify_room_owner_verified
     unless @room.owner.email_verified

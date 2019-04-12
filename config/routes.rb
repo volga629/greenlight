@@ -38,7 +38,6 @@ Rails.application.routes.draw do
 
   # post '/generate_and_send_token', to: 'application#generate_and_send_token', as: :generate_and_send_token
 
-
   match '/terms', to: 'users#terms', via: [:get, :post]
 
   # Password reset resources.
@@ -86,7 +85,6 @@ Rails.application.routes.draw do
       post :send_invitation_to_users
     end
   end
-
 
   # for email_template_resources
   resources :email_templates

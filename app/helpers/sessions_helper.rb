@@ -80,10 +80,9 @@ module SessionsHelper
       end
   end
 
-  def generate_and_send_token user
+  def generate_and_send_token(user)
     token = SecureRandom.hex(6)
     user.update(token: token)
     UserMailer.send_token_to_user(user).deliver
   end
-  
 end

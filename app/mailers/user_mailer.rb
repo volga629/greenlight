@@ -31,29 +31,27 @@ class UserMailer < ApplicationMailer
     mail to: user.email, subject: t('reset_password.subtitle')
   end
 
-  def send_invitation params
-    params["group-a"].each do |index, user|
-      if User.find_by(email: user["text-input"]).present?
-        @template = EmailTemplate.find_by_name('Meeting Scheduled')
-        @user = User.find_by(email: user["text-input"])
-        @room = Room.find_by(uid: params[:room_uid] )
-        details = {user_name: @user.name, room_name: @room.name , date: DateTime.now.strftime("%m/%d/%Y")}
-        @new_template = EmailTemplate.parse_template(@template, details)
-        @content= ActionView::Base.full_sanitizer.sanitize(@new_template)
-        send_email_to_user(@user,@content)
-      end
+  def send_invitation(params)
+    params["group-a"].each do |_index, user|
+      next unless User.find_by(email: user["text-input"]).present?
+      @template = EmailTemplate.find_by_name('Meeting Scheduled')
+      @user = User.find_by(email: user["text-input"])
+      @room = Room.find_by(uid: params[:room_uid])
+      details = { user_name: @user.name, room_name: @room.name, date: DateTime.now.strftime("%m/%d/%Y") }
+      @new_template = EmailTemplate.parse_template(@template, details)
+      @content = ActionView::Base.full_sanitizer.sanitize(@new_template)
+      send_email_to_user(@user, @content)
     end
   end
 
-  def send_email_to_user user , body
-   @user = user.email
-   (mail to: @user, subject: t('user_invitation.subtitle')).deliver
+  def send_email_to_user(user, _body)
+    @user = user.email
+    (mail to: @user, subject: t('user_invitation.subtitle')).deliver
   end
 
-  def send_token_to_user user
+  def send_token_to_user(user)
     @template = EmailTemplate.find_by_name('Token Information')
     @user = user
     mail to: user.email, subject: t('user_token_information.subtitle')
   end
-
 end

@@ -32,7 +32,7 @@ class SessionsController < ApplicationController
     if @user.present?
       generate_and_send_token(@user)
       respond_to do |format|
-        format.js {render "create", :locals => {:user => @user} }
+        format.js { render "create", locals: { user: @user } }
         format.html
       end
     else
@@ -55,7 +55,7 @@ class SessionsController < ApplicationController
     @user = User.find_by_uid(params[:id])
     generate_and_send_token(@user)
     respond_to do |format|
-      format.js{}
+      format.js {}
     end
   end
 
