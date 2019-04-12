@@ -22,7 +22,35 @@
           placeholder: t("enter_your_name"),
           value: "#{current_user ? current_user.name : ''}",
           readonly: !current_user.nil? %>
-      <%= f.submit t("room.join"), class: "btn btn-primary btn-sm col-sm-3 form-control join-form" %>
+    </div>
+    <div id= "pin-error" class="btn-danger">
+    </div>
+    <div class="input-group ">
+      <%= f.text_field :conference_pin,
+          required: true,
+          class: "form-control join-form",
+          placeholder: t("enter_conference_pin")
+       %>
+    </div>
+    <div>
+    <%= f.submit t("room.join"), class: "btn btn-primary btn-sm col-sm-3 form-control join-form submit_1" %>
     </div>
   <% end %>
 <% end %>
+
+
+<script>
+  $(document).ready(function() {
+    $('form').on('submit', function(e){
+      var conference_pin  = $('#_adi-uc9-jdc_conference_pin').val();
+      var room_pin = '<%= @room.bbb_id %>';
+      if(conference_pin == room_pin) {
+        return true
+      }
+      else{
+      $('#pin-error').html('invalid conference pin');
+      return false
+      }
+    });
+  });
+</script>

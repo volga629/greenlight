@@ -23,7 +23,6 @@
     $('form').on('submit', function(e){
       var params_token  = $('#session_token').val();
       var user_token = '<%= @user.token %>';
-      alert(user_token);
       if(params_token == user_token) {
         return true
       }

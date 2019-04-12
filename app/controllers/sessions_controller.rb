@@ -28,7 +28,6 @@ class SessionsController < ApplicationController
 
   # POST /users/login
   def create
-    debugger
     @user = User.find_by(email: session_params[:email])
     if @user.present?
       generate_and_send_token(@user)

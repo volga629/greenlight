@@ -16,5 +16,10 @@
 # with BigBlueButton; if not, see <http://www.gnu.org/licenses/>.
 %>
 
-<h1>User Token Information</h1>
-	<%= @template.template_details.html_safe %>
+<h1>Meeting Scheduling Invitation</h1>
+   <%= @content%> 
+<p> For joining the conference kindly click on the link given 
+    <%= link_to 'join the conference', "#{APP_URL}/#{@room.uid}" %>
+</p>
+ <p> Conference Room pin Also Attached: <%= @room.bbb_id%> 
+</p>	

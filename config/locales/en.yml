@@ -34,6 +34,7 @@ en:
   email: Email
   email_sent: Email Sent! (Please check your Spam folder if you haven't received it)
   enter_your_name: Enter your name!
+  enter_conference_pin: Enter Conference Pin
   errors:
     internal:
       message: Oh no! Looks like something went wrong on our end.
@@ -186,6 +187,7 @@ en:
     unavailable: This room is currently unavailable due to the owner's email not being verified.
     update_settings_error: There was an error updating the room settings
     update_settings_success: Room settings successfully updated
+    conference_pin_error: Conference pin not verified.
     wait:
       message: Oops! The meeting hasn't started yet.
       auto: You will automatically join when the meeting starts.
