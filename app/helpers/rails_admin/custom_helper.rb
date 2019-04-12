@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
-module RailsAdmin::CustomHelper
-  include RailsAdmin::TemplatesHelper
+module RailsAdmin
+  class CustomHelper
+    include RailsAdmin::TemplatesHelper
+  end
 end

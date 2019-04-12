@@ -8,5 +8,5 @@ class EmailTemplate < ApplicationRecord
     end
     result.gsub!(/\{\{\.w+\}\}/, '')
     result
-    end
+  end
 end
